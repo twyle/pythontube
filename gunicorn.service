@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve the Python learning site.
+After=network.target
+
+[Service]
+User=lyle
+Group=lyle
+WorkingDirectory=/home/lyle/python-youtube-learning-site/services/app
+Environment="PATH=/home/lyle/python-youtube-learning-site/venv/bin"
+EnvironmentFile=/home/lyle/.env
+ExecStart=/home/lyle/python-youtube-learning-site/venv/bin/gunicorn --workers 1 --bind 0.0.0.0:5000 mananage:app
+
+[Install]
+WantedBy=multi-user.target
