@@ -42,9 +42,10 @@ build-prod:
 run-prod:
 	@docker run -p5000:5000 --env-file=./services/app/.env learning-site-prod:latest
 
-ayv:
-	@pip uninstall ayv -y
-	@pip install /home/lyle/professional-projects/youtube/dist/ayv-0.5.0-py3-none-any.whl
+install-youtube:
+	# @pip install --upgrade youtube@git+https://github.com/twyle/youtube
+	@pip uninstall youtube -y
+	@pip install /home/lyle/git/youtube/dist/youtube-0.6.0-py3-none-any.whl
 
 dev:
 	@docker-compose -f docker-compose-dev.yaml up --build

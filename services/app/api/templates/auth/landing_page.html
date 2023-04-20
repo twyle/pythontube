@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing_page.css') }}">
+</head>
+<body>
+
+    <main>
+
+        <div class="big-wrapper">
+            <header>
+                <div class="container">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+                    </div>
+
+                    <div class="links">
+                        <ul>
+                            <li><a href="{{ url_for('login') }}" class="btn" >Find Videos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="showcase-area">
+
+                <div class="container">
+
+                    <div class="left">
+                        <div class="big-title">
+                            <h1>YouTube Videos,</h1>
+                            <h1>For Learning Python.</h1>
+                        </div>
+    
+                        <p class="text">
+                            Find and watch the best python programming 
+                            videos from the top Youtube channels, Playlists 
+                            and Creators. This includes videos on Web 
+                            Development, Data Science, Machine Learning, Web 
+                            Scraping, Data Structures and Algorithms...
+                        </p>
+    
+                        <div class="cta">
+                            <a href="{{ url_for('login') }}" class="btn">Find Videos</a>
+                        </div>
+                    </div>
+    
+                    <div class="right">
+                        <img src="{{ url_for('static', filename='img/python.png') }}" class="person" alt="">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+    
+</body>
+
+<script src="./js/index.js"></script>
+
+</html>

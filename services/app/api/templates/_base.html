@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/project.css') }}">
+</head>
+<body>
+
+    <!--------------------------NAVBAR------------------------------>
+    <nav class="flex-div">
+
+        <div class="nav-left flex-div">
+            <img src="{{ url_for('static', filename='img/menu.png') }}" alt="" class="menu-icon">
+            <a href="{{ url_for('home.home_page') }}">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" class="logo">
+            </a>
+        </div>
+
+        <form action="{{ url_for('home.search_videos') }}" id="search-form" method="post" enctype = "multipart/form-data">    
+            <div class="nav-middle flex-div">
+                <div class="search-box flex-div">
+                    <input type="text" name="search-box" id="searchBox" placeholder="Search" autocomplete="off">
+                    <img src="{{ url_for('static', filename='img/search.png') }}" alt="">
+                </div>
+
+                <div class="search-suggestions">
+                    <ul class="suggestions">
+                    </ul>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="nav-right flex-div">
+            {% if current_user.picture %}
+                <img src="{{ current_user.picture }}" alt="" class="user-icon">
+            {% else %}
+                <img src="{{ url_for('static', filename='img/default.jpeg') }}" alt="" class="user-icon">
+            {% endif %}
+        </div>
+
+    </nav>
+    <!--------------------------END OF NAVBAR------------------------------>
+    
+    <!--------------------------SIDEBAR------------------------------>
+    <div class="sidebar">
+
+        <div class="shortcut-links">
+            <a href="#" class="menu-item active">
+                <img src="{{ url_for('static', filename='img/home.png') }}" alt="">
+                <p>Videos</p>
+            </a>
+
+            <a href="{{ url_for('login_page') }}" class="menu-item">
+                <img src="{{ url_for('static', filename='img/home.png') }}" alt="">
+                <p>Logout</p>
+            </a>
+        </div>
+    </div>
+    <!--------------------------END OF SIDEBAR------------------------------>
+
+    <!--------------------------MAIN------------------------------>
+    
+    {% block content %}
+      
+    {% endblock %}
+
+    <!--------------------------END OF MAIN------------------------------>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/project.js') }}"></script>
+
+</body>
+</html>

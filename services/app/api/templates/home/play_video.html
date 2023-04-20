@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!--------------------------NAVBAR------------------------------>
+    <nav class="flex-div">
+
+        <div class="nav-left flex-div">
+            <img src="{{ url_for('static', filename='img/menu.png') }}" alt="" class="menu-icon">
+            <a href="{{ url_for('home.home_page') }}">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" class="logo">
+            </a>
+        </div>
+
+        <form action="{{ url_for('home.search_videos') }}" id="search-form" method="post" enctype = "multipart/form-data">    
+            <div class="nav-middle flex-div">
+                <div class="search-box flex-div">
+                    <input type="text" name="search-box" id="searchBox" placeholder="Search">
+                    <img src="{{ url_for('static', filename='img/search.png') }}" alt="">
+                </div>
+
+                <div class="search-suggestions">
+                    <ul class="suggestions">
+                    </ul>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="nav-right flex-div">
+            {% if current_user.picture %}
+                <img src="{{ current_user.picture }}" alt="" class="user-icon">
+            {% else %}
+                <img src="{{ url_for('static', filename='img/default.jpeg') }}" alt="" class="user-icon">
+            {% endif %}
+        </div>
+
+    </nav>
+    <!--------------------------END OF NAVBAR------------------------------>
+
+    <div class="container play-container">
+        <div class="row">
+            {% if video %}
+
+                <div class="play-video">
+
+                    <iframe id="player" type="text/html" width="770" height="450"
+                        src="http://www.youtube.com/embed/{{ video.video_id }}?enablejsapi=1"
+                        frameborder="0">
+                    </iframe>
+
+                    <div class="tags">
+                        <a href="">#Coding</a>
+                        <a href="">#HTML</a>
+                        <a href="">#CSS</a>
+                        <a href="">#Javascript</a>
+                    </div>
+
+                    <h3>{{ video.video_title }}</h3>
+
+                    <div class="play-video-info">
+                        <p>{{ video.view_count }} Views &bull; 2 days ago</p>
+                        <div>
+                            <a href="">
+                                <img src="{{ url_for('static', filename='img/like.png') }}" alt="">
+                                {{ video.like_count}}
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="publisher">
+                        <img src="{{ video.channel_thumbnail }}" alt="">
+                        <div>
+                            <p>{{ video.channel_title }}</p>
+                            <span>{{ video.channel_subscribers }} Subscribers</span>
+                        </div>
+
+                        <button type="button">
+                            <a href="#">Take Test</a>
+                        </button>
+                    </div>
+
+                    <div class="vid-description">
+                        <p>
+                            {{ video.video_description}}
+                        </p>
+
+                        <hr>
+                        <h4>{{ video.comment_count }} Comments</h4>
+
+                        <div class="add-comment">
+                            {% if current_user.picture %}
+                                <img src="{{ current_user.picture }}" alt="">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='img/default.jpeg') }}" alt="">
+                            {% endif %}
+                            <input type="text" name="" placeholder="Write comment..." id="">
+                        </div>
+
+                        {% if comments %}
+
+                            {% for comment in comments %}
+                                <div class="old-comment">
+                                    <img src="{{ comment.authorProfileImageUrl }}" alt="">
+                                    <div>
+                                        <h3> {{ comment.authorDisplayName }} <span>2 days ago</span></h3>
+                                        <p> {{ comment.textDisplay }} </p>
+                                        <div class="comment-action">
+                                            <img src="{{ url_for('static', filename='img/like.png') }}" alt="">
+                                            <span>{{ comment.likeCount }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+                        {% endif %}
+
+                    </div>
+
+                </div>
+                
+            {% endif %}
+
+            <div class="right-sidebar">
+
+                <div class="vids">
+
+                    {% if similar_videos %}
+                        
+                        {% for video in similar_videos %}
+                            <div class="side-video-list">
+                                <a href="{{ url_for('home.play_video', video_id=video.video_id) }}" class="small-thumbnail">
+                                    <img src="{{ video.video_thumbnail }}"
+                                        alt="">
+                                    </a>
+                                <div class="vid-info">
+                                    <a href="{{ url_for('home.play_video', video_id=video.video_id) }}">{{ video.video_title }}</a>
+                                    <p>{{ video.channel_title }}</p>
+                                    <p>{{ video.view_count }} Views</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    {% endif %}
+
+                </div>
+
+                <div class="more-similar-videos">
+                    <p class="videos">Loading the videos...</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/play.js') }}"></script>
+
+</body>
+
+</html>

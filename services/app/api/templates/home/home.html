@@ -1,0 +1,34 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    
+    <div class="container">
+
+        <div class="list-container">
+            {% if videos %}
+                {% for video in videos %}
+                    <div class="vid-list">
+                        <a href="{{ url_for('home.play_video', video_id=video.video_id) }}">
+                            <img src="{{ video.video_thumbnail }}" alt="" class="thumbnail">
+                        </a>
+                        <div class="flex-div">
+                            <img src="{{ video.channel_thumbnail }}" alt="">
+                            <div class="vid-info">
+                                <a href="{{ url_for('home.play_video', video_id=video.video_id) }}">{{ video.video_title }}</a>
+                                <p>{{ video.channel_title }}</p>
+                                <p>{{ video.view_count }} Views &bull; 2 days</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <div class="more-content">
+            <p class="text">Loading the videos...</p>
+        </div>
+
+    </div>
+
+{% endblock %}
