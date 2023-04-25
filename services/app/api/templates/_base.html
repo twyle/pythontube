@@ -7,6 +7,8 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/project.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  />
 </head>
 <body>
 
@@ -41,6 +43,28 @@
             {% else %}
                 <img src="{{ url_for('static', filename='img/default.jpeg') }}" alt="" class="user-icon">
             {% endif %}
+
+            <div class="context-menu">
+                <div class="dropdownmenu profile-ctx">
+                    <div class="card">
+                        <div class="user-profile ctx-menu active">
+                            <span>
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                            </span>
+                            <small class="active-menu menu-item">Videos</small>
+                        </div>
+                        <div class="logout ctx-menu">
+                            <span>
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </span>
+                            <a href="{{ url_for('login_page') }}">
+                                <small class="menu-item">Logout</small>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
 
     </nav>
@@ -51,14 +75,20 @@
 
         <div class="shortcut-links">
             <a href="#" class="menu-item active">
-                <img src="{{ url_for('static', filename='img/home.png') }}" alt="">
+                <span>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </span>
                 <p>Videos</p>
             </a>
 
+
             <a href="{{ url_for('login_page') }}" class="menu-item">
-                <img src="{{ url_for('static', filename='img/home.png') }}" alt="">
+                <span>
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </span>
                 <p>Logout</p>
             </a>
+
         </div>
     </div>
     <!--------------------------END OF SIDEBAR------------------------------>
@@ -72,7 +102,5 @@
     <!--------------------------END OF MAIN------------------------------>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/project.js') }}"></script>
-
 </body>
 </html>

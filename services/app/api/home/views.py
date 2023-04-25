@@ -17,10 +17,19 @@ search_client = youtube.get_search_client(query)
 # @login_required
 def home_page():
     """Render the home page."""
-    prev_token, next_token, videos = search_client.search_videos()
-    videos = [video.to_dict() for video in videos]
+    videos = []
     return render_template('home/home.html', title='Home', videos=videos)
 
+@home.route('/load_videos')
+def load_videos():
+    next_page = request.args.get('next_token')
+    prev_token, next_token, videos = search_client.search_videos(next_page_token=next_page)
+    videos = [video.to_dict() for video in videos] 
+    
+    return jsonify({
+        'videos': videos,
+        'next_token': next_token
+    })
 
 @home.route("/play_video")
 # @login_required

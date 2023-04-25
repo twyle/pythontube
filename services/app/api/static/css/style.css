@@ -1,4 +1,4 @@
-{
+*{
     margin: 0;
     padding: 0;
     font-family: 'poppins', 'sans-serif';
@@ -84,6 +84,35 @@ nav{
     border: #000 1px solid;
 }
 
+.context-menu{
+    position: relative;
+    display: none;
+}
+
+.context-menu .dropdownmenu{
+    position: absolute;
+    top: 1rem;
+    left: -3.5rem;
+    width: 4.5rem;
+    height: fit-content;
+    background: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 0 1rem blue;
+    z-index: 10;
+}
+
+.context-menu .dropdownmenu .ctx-menu{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;  
+}
+
+.context-menu .dropdownmenu .menu-item:hover{
+    background: white;
+    color: blue;
+}
+
 /*=======================END OF NAVBAR=================================*/
 
 /*=======================SIDEBAR=================================*/
@@ -105,8 +134,8 @@ nav{
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    width: fit-content;
-    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-between;
 }
 
 .shortcut-links .active{
@@ -183,6 +212,22 @@ nav{
     display: block;
     margin-bottom: 5px;
 }
+
+.loader {
+    border: 6px solid white; /* Light grey */
+    border-top: 6px solid red; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 /*=======================END OF MAIN=================================*/
 
 /*=======================HOME PAGE RESPONSIVENESS=======================*/
@@ -446,7 +491,3 @@ nav{
     }
 }
 /*=====================END OF PLAY VIDEO PAGE RESPONSIVENESS==============*/
-
-.intersecting{
-    color: red;
-}
