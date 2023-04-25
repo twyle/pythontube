@@ -9,6 +9,7 @@ from ..utils.http_status_codes import HTTP_200_OK
 home = Blueprint("home", __name__)
 query = 'Python programming'
 search_client = youtube.get_search_client(query)
+similar_search_client = youtube.get_related_video_search_client()
 
 @home.route("/")
 @home.route("/home")
@@ -42,14 +43,22 @@ def play_video():
     ]
     
     video = video.to_dict()
-    
-    search_client = youtube.get_related_video_search_client()
-    prev, nxt, similar_videos = search_client.search_related_videos(video_id)
-    similar_videos = [video.to_dict() for video in similar_videos]
+    similar_videos = []
     return render_template('home/play_video.html', 
             video=video, similar_videos=similar_videos,
             comments=comments)
-
+    
+    
+@home.route('/similar_videos')
+def get_similar_videos():
+    video_id = request.args.get("video_id")
+    next_page = request.args.get('next_token')
+    prev, next_token, similar_videos = similar_search_client.search_related_videos(video_id, next_page_token=next_page)
+    similar_videos = [video.to_dict() for video in similar_videos]
+    return jsonify({
+        'videos': similar_videos,
+        'next_token': next_token
+    })
 
 @home.route("/search", methods=["POST"])
 def search_videos():

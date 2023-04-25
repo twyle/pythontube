@@ -49,6 +49,7 @@ const loadMoreVideos = (videos) => {
         channelBanner.src = video['video_thumbnail']
         channelBanner.classList.add('thumbnail')
         const video_link = document.createElement('a')
+        video_link.href = `http://localhost:5000/play_video?video_id=${video['video_id']}`
         video_link.appendChild(channelBanner)
 
         const flexDiv = document.createElement('div')
@@ -61,6 +62,7 @@ const loadMoreVideos = (videos) => {
         videoInfo.classList.add('vid-info')
 
         const videoTitle = document.createElement('a')
+        videoTitle.href = `http://localhost:5000/play_video?video_id=${video['video_id']}`
         videoTitle.textContent = video['video_title']
         videoInfo.appendChild(videoTitle)
 

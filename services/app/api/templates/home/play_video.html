@@ -51,7 +51,7 @@
         <div class="row">
             {% if video %}
 
-                <div class="play-video">
+                <div class="play-video" id="{{ video['video_id'] }}">
 
                     <iframe id="player" type="text/html" width="770" height="450"
                         src="http://www.youtube.com/embed/{{ video.video_id }}?enablejsapi=1"
@@ -156,8 +156,8 @@
 
                 </div>
 
-                <div class="more-similar-videos">
-                    <p class="videos">Loading the videos...</p>
+                <div class="loader play-video">
+            
                 </div>
 
             </div>
@@ -165,7 +165,7 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/play.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/play_video.js') }}"></script>
 
 </body>
 
